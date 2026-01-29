@@ -118,12 +118,12 @@ def convert_pdf_to_images(
         return False, f"Conversion error: {str(e)}", []
 
 
-@app.post("/pdf-to-images", response_model=ConversionResponse)
+@app.post("/pdf-to-images", response_model=None)
 async def pdf_to_images(
     pdf: UploadFile = File(..., description="PDF file to convert"),
     fmt: Literal["png", "jpeg"] = Query("png", description="Output image format"),
     dpi: int = Query(300, ge=72, le=600, description="DPI resolution (72-600)")
-) -> ConversionResponse | JSONResponse:
+):
     """
     Convert PDF pages to individual image files
 
@@ -193,8 +193,8 @@ async def pdf_to_images(
         )
 
 
-@app.get("/download/{job_id}/{filename}")
-async def download_image(job_id: str, filename: str) -> FileResponse | JSONResponse:
+@app.get("/download/{job_id}/{filename}", response_model=None)
+async def download_image(job_id: str, filename: str):
     """
     Download a specific image file from a conversion job
 
@@ -263,8 +263,8 @@ async def health_check():
     }
 
 
-@app.delete("/cleanup/{job_id}")
-async def cleanup_job(job_id: str) -> JSONResponse:
+@app.delete("/cleanup/{job_id}", response_model=None)
+async def cleanup_job(job_id: str):
     """
     Manually delete a job folder (optional endpoint for cleanup)
     """
