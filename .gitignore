@@ -23,3 +23,6 @@ ENV/
 
 # Temp directories
 /tmp/
+
+# Claude Code
+.claude/

@@ -18,7 +18,25 @@ REST API đơn giản để chuyển đổi PDF scan thành từng ảnh riêng 
 
 ## Cài đặt và chạy
 
-### Chạy bằng Docker (Khuyến nghị)
+### Chạy bằng Docker Compose (Khuyến nghị cho Production)
+
+```bash
+# Start service
+docker compose up -d
+
+# Check logs
+docker compose logs -f
+
+# Check status
+docker compose ps
+
+# Health check
+curl http://localhost:8000/health
+```
+
+**Deploy lên VPS Ubuntu?** Xem hướng dẫn chi tiết tại [DEPLOY.md](DEPLOY.md)
+
+### Chạy bằng Docker (Manual)
 
 1. Build Docker image:
 ```bash

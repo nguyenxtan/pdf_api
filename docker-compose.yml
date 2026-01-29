@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  pdf-api:
+    build: .
+    container_name: pdf-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist converted images between restarts
+      - pdf-data:/tmp/pdf2img
+    restart: unless-stopped
+    environment:
+      # Optional: Add any environment variables here
+      - TZ=Asia/Ho_Chi_Minh
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  pdf-data:
+    driver: local
