@@ -3,10 +3,11 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies (poppler-utils for pdftoppm)
+# Install system dependencies (poppler-utils for pdftoppm, curl for health check)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    poppler-utils && \
+    poppler-utils \
+    curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
